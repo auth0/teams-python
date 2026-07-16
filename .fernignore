@@ -1,0 +1,42 @@
+# Specify files that shouldn't be modified by Fern
+
+# Fern metadata
+.fern/
+
+# Custom wrapper client and token management
+src/auth0/teams/_wrapper.py
+src/auth0/teams/token_provider.py
+
+# Telemetry customization (Auth0 format with dynamic versioning).
+# version.py is protected because client_wrapper.py imports __version__ from it.
+src/auth0/teams/core/client_wrapper.py
+src/auth0/teams/version.py
+
+# Package __init__ files
+src/auth0/__init__.py
+src/auth0/teams/__init__.py
+
+# Custom tests, incl. test_regeneration_guard.py guarding wire/conftest.py.
+tests/custom/
+
+# Hand-authored WireMock lifecycle plugin for the wire suite.
+tests/conftest.py
+
+# Project config and docs
+pyproject.toml
+poetry.lock
+requirements.txt
+README.md
+CONTRIBUTING.md
+.version
+
+# Release and security-scan config
+.shiprc
+.snyk
+.semgrepignore
+
+# Git and CI configuration
+.gitignore
+.github/
+LICENSE
+NOTICE.txt

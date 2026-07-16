@@ -1,0 +1,18 @@
+{
+  "cliVersion": "5.20.1",
+  "generatorName": "fernapi/fern-python-sdk",
+  "generatorVersion": "5.3.6",
+  "generatorConfig": {
+    "client": {
+      "class_name": "Teams"
+    },
+    "package_path": "teams",
+    "enable_wire_tests": true,
+    "offsetSemantics": "page-index",
+    "pydantic_config": {
+      "use_provided_defaults": true
+    }
+  },
+  "originGitCommit": "219914accde9916f411f553a3e3eb35a8478eaaf",
+  "sdkVersion": "0.0.0"
+}

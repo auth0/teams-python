@@ -1,0 +1,75 @@
+name: Build and Test
+
+on:
+  merge_group:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-22.04-2cpu-8ram-75ssd
+
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
+    steps:
+      - if: github.actor == 'dependabot[bot]' || github.event_name == 'merge_group'
+        run: exit 0 # Skip unnecessary test runs for dependabot and merge queues. Artificially flag as successful, as this is a required check for branch protection.
+
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
+
+      - name: Configure Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: "${{ matrix.python-version }}"
+
+      - name: Configure dependencies
+        run: |
+          pip install --user --upgrade pip
+          pip install --user pipx
+          pip install --user setuptools
+          pipx ensurepath
+          pipx install poetry
+          poetry config virtualenvs.in-project true
+          poetry install --with dev
+
+      - name: Lint
+        run: |
+          poetry run ruff check .
+          poetry run ruff format --check .
+
+      - name: Type-check
+        run: poetry run mypy .
+
+      - name: Start WireMock
+        run: docker compose -f wiremock/docker-compose.test.yml -p auth0-api up -d --wait
+
+      - name: Run tests
+        run: poetry run pytest -rP -n auto .
+
+      - name: Install aiohttp extra
+        run: poetry install --with dev --extras aiohttp
+
+      - name: Run tests (aiohttp)
+        run: poetry run pytest -rP -n auto -m aiohttp .
+
+      - name: Stop WireMock
+        if: always()
+        run: docker compose -f wiremock/docker-compose.test.yml -p auth0-api down -v
