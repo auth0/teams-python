@@ -1,47 +1,37 @@
-# Auth0 Teams SDK for Python
+![Python SDK for Auth0 Teams](https://cdn.auth0.com/website/sdks/banners/teams-python-banner.png)
+
+<div align="center">
 
 [![pypi](https://img.shields.io/pypi/v/auth0-teams-python)](https://pypi.python.org/pypi/auth0-teams-python)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/auth0/teams-python/blob/HEAD/LICENSE)
+[![License](https://img.shields.io/:license-Apache%202.0-blue.svg?style=flat)](https://github.com/auth0/teams-python/blob/HEAD/LICENSE)
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fauth0%2Fteams-python)
 
-The Auth0 Teams SDK for Python provides convenient access to the Auth0 Teams API from Python.
+📚 [Documentation](#documentation) • 🚀 [Getting Started](#getting-started) • 💬 [Feedback](#feedback)
 
-## Table of Contents
+</div>
 
-- [Installation](#installation)
-- [Reference](#reference)
-- [Usage](#usage)
-- [Async Client](#async-client)
-- [Exception Handling](#exception-handling)
-- [Pagination](#pagination)
-- [Advanced](#advanced)
-  - [Access Raw Response Data](#access-raw-response-data)
-  - [Retries](#retries)
-  - [Timeouts](#timeouts)
-  - [Additional Headers](#additional-headers)
-  - [Logging](#logging)
-  - [Telemetry](#telemetry)
-  - [Custom Client](#custom-client)
-- [Feedback](#feedback)
-  - [Contributing](#contributing)
-  - [Raise an issue](#raise-an-issue)
-  - [Vulnerability Reporting](#vulnerability-reporting)
-- [What is Auth0?](#what-is-auth0)
+---
 
-## Installation
+## Documentation
+
+- [Docs Site](https://auth0.com/docs) - explore our docs site and learn more about Auth0
+- [API Reference](https://github.com/auth0/teams-python/blob/HEAD/./reference.md) - full reference for this library
+
+## Getting Started
+
+### Requirements
+
+This library supports the following tooling versions:
+
+- Python >= 3.10
+
+### Installation
 
 ```sh
 pip install auth0-teams-python
 ```
 
-**Requirements:**
-- Python ≥3.10
-
-## Reference
-
-A full reference for this library is available [here](https://github.com/auth0/teams-python/blob/HEAD/./reference.md).
-
-## Usage
+### Configure the SDK
 
 The client supports two authentication modes. With an existing token (a static string,
 or a callable that returns one from your own auth flow):

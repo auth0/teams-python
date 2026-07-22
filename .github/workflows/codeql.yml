@@ -24,7 +24,7 @@ concurrency:
 jobs:
   analyze:
     name: Check for Vulnerabilities
-    runs-on: ubuntu-22.04-2cpu-8ram-75ssd
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
